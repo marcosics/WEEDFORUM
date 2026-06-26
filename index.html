@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>WeedForum — Comunidad Cannábica</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="toast" class="hidden"></div>
+
+<!-- ===== AUTH SCREEN ===== -->
+<div id="auth-screen">
+  <div class="auth-container">
+    <div class="auth-logo">🌿</div>
+    <h2 class="auth-title">WeedForum</h2>
+    <p class="auth-sub">Comunidad Cannábica</p>
+
+    <form id="login-form" class="auth-form">
+      <div class="input-icon">👤 <input type="text" id="login-username" placeholder="Usuario" required autocomplete="username"></div>
+      <div class="input-icon">🔒 <input type="password" id="login-password" placeholder="Contraseña" required autocomplete="current-password"></div>
+      <button type="submit" class="auth-btn">Iniciar Sesión</button>
+      <p class="auth-switch">¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
+    </form>
+
+    <form id="register-form" class="auth-form hidden">
+      <div class="input-icon">👤 <input type="text" id="reg-username" placeholder="Nombre de usuario" required autocomplete="off"></div>
+      <div class="input-icon">📧 <input type="email" id="reg-email" placeholder="Correo electrónico" required autocomplete="email"></div>
+      <div class="input-icon">🔒 <input type="password" id="reg-password" placeholder="Contraseña" required autocomplete="new-password"></div>
+      <div class="input-icon">🔒 <input type="password" id="reg-confirm" placeholder="Confirmar contraseña" required autocomplete="new-password"></div>
+      <button type="submit" class="auth-btn">Crear Cuenta</button>
+      <p class="auth-switch">¿Ya tienes cuenta? <a href="#" id="show-login">Inicia Sesión</a></p>
+    </form>
+  </div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="app" class="hidden">
+
+  <!-- Header -->
+  <header id="main-header">
+    <div class="header-left">
+      <h1 id="header-title">WeedForum</h1>
+      <div class="subtitle">Comunidad Cannábica</div>
+    </div>
+    <div class="header-right">
+      <button class="glass-btn" id="btn-search-toggle">🔍</button>
+      <button class="glass-btn" id="btn-theme-toggle">🌙</button>
+    </div>
+  </header>
+
+  <!-- ===== VIEW: FEED ===== -->
+  <main id="view-feed" class="view active">
+    <div class="feed-tabs">
+      <button class="tab active" data-feed="latest">Últimas</button>
+      <button class="tab" data-feed="following">Siguiendo</button>
+      <button class="tab" data-feed="top">Top 🔥</button>
+    </div>
+    <div id="feed-content"></div>
+  </main>
+
+  <!-- ===== VIEW: EXPLORE ===== -->
+  <main id="view-explore" class="view hidden">
+    <div class="explore-search">
+      <div class="input-icon" style="flex:1">🔍 <input type="text" id="explore-search" placeholder="Buscar cepas, usuarios..."></div>
+    </div>
+    <div class="explore-tabs">
+      <button class="tab active" data-explore="strains">🌿 Cepas</button>
+      <button class="tab" data-explore="users">👥 Usuarios</button>
+      <button class="tab" data-explore="posts">📝 Posts</button>
+    </div>
+    <div id="explore-content"></div>
+  </main>
+
+  <!-- ===== VIEW: CREATE POST ===== -->
+  <main id="view-create" class="view hidden">
+    <div class="create-card glass">
+      <h3>Nueva Publicación</h3>
+      <div class="create-user-row">
+        <div class="avatar-sm" id="create-avatar">👤</div>
+        <span id="create-username"></span>
+      </div>
+      <textarea id="post-content" placeholder="¿Qué estás fumando? Comparte tu experiencia..." rows="4"></textarea>
+      <div class="create-row">
+        <select id="post-strain"><option value="">Seleccionar cepa...</option></select>
+        <label class="img-upload glass-btn" title="Añadir imagen">📷<input type="file" id="post-image" accept="image/*" hidden></label>
+      </div>
+      <div id="post-image-preview" class="hidden"><img id="post-image-img"><button id="post-image-remove" class="glass-btn">✕</button></div>
+      <div class="create-types">
+        <label class="type-tag" data-type="sativa">🌞 Sativa</label>
+        <label class="type-tag" data-type="indica">🌙 Indica</label>
+        <label class="type-tag" data-type="hybrid">⚡ Híbrido</label>
+      </div>
+      <button id="btn-post" class="auth-btn" style="margin-top:0.75rem">Publicar 🌿</button>
+    </div>
+  </main>
+
+  <!-- ===== VIEW: NOTIFICATIONS ===== -->
+  <main id="view-notifications" class="view hidden">
+    <div id="notif-content"></div>
+  </main>
+
+  <!-- ===== VIEW: PROFILE ===== -->
+  <main id="view-profile" class="view hidden">
+    <div class="profile-wrapper">
+      <div class="profile-cover" id="profile-cover"></div>
+      <div class="profile-info glass">
+        <div class="profile-avatar-container">
+          <div class="profile-avatar" id="profile-avatar">👤</div>
+          <div class="profile-dropdown-trigger" id="profile-dropdown-btn">⋮</div>
+          <div class="profile-dropdown hidden" id="profile-dropdown">
+            <div class="dropdown-item" data-action="share">🔗 Compartir perfil</div>
+            <div class="dropdown-item" data-action="copy">📋 Copiar usuario</div>
+            <div class="dropdown-item" data-action="block">🚫 Bloquear</div>
+          </div>
+        </div>
+        <h2 id="profile-name"></h2>
+        <p class="profile-bio" id="profile-bio"></p>
+        <p class="profile-meta">📍 <span id="profile-location">Desconocido</span> · 🗓️ <span id="profile-joined"></span></p>
+        <div class="profile-stats">
+          <div><strong id="profile-posts-count">0</strong><span>Publicaciones</span></div>
+          <div><strong id="profile-followers-count">0</strong><span>Seguidores</span></div>
+          <div><strong id="profile-following-count">0</strong><span>Siguiendo</span></div>
+        </div>
+        <div class="profile-actions" id="profile-actions">
+          <button class="auth-btn" id="btn-edit-profile" style="flex:1">✏️ Editar Perfil</button>
+          <button class="auth-btn secondary" id="btn-logout">🚪 Salir</button>
+        </div>
+      </div>
+    </div>
+    <div class="profile-tabs">
+      <button class="tab active" data-ptab="posts">📝 Posts</button>
+      <button class="tab" data-ptab="likes">❤️ Likes</button>
+      <button class="tab" data-ptab="strains">🌿 Cepas</button>
+    </div>
+    <div id="profile-posts"></div>
+  </main>
+
+  <!-- ===== VIEW: STRAINS CATALOG ===== -->
+  <main id="view-strains" class="view hidden">
+    <div class="explore-search">
+      <div class="input-icon" style="flex:1">🔍 <input type="text" id="strains-search" placeholder="Buscar cepa..."></div>
+    </div>
+    <div class="strain-filters">
+      <button class="strain-filter active" data-filter="all">🌿 Todas</button>
+      <button class="strain-filter" data-filter="sativa">🌞 Sativa</button>
+      <button class="strain-filter" data-filter="indica">🌙 Indica</button>
+      <button class="strain-filter" data-filter="hybrid">⚡ Híbrido</button>
+    </div>
+    <div id="strains-grid"></div>
+  </main>
+
+  <!-- ===== VIEW: STRAIN DETAIL ===== -->
+  <main id="view-strain-detail" class="view hidden">
+    <button class="glass-btn back-btn">← Volver</button>
+    <div id="strain-detail-content"></div>
+  </main>
+
+  <!-- ===== VIEW: POST DETAIL ===== -->
+  <main id="view-post-detail" class="view hidden">
+    <button class="glass-btn back-btn">← Volver</button>
+    <div id="post-detail-content"></div>
+    <div class="comment-form glass">
+      <textarea id="comment-input" placeholder="Escribe un comentario..." rows="2"></textarea>
+      <button id="btn-comment" class="auth-btn" style="margin-top:0.5rem">💬 Comentar</button>
+    </div>
+  </main>
+
+  <!-- ===== VIEW: EDIT PROFILE ===== -->
+  <main id="view-edit-profile" class="view hidden">
+    <div class="edit-header">
+      <button class="glass-btn back-btn">←</button>
+      <h3>Editar Perfil</h3>
+      <span></span>
+    </div>
+    <div class="create-card glass">
+      <div class="edit-avatar-section">
+        <div class="edit-current-avatar" id="edit-current-avatar">👤</div>
+        <label class="auth-btn" style="text-align:center;cursor:pointer;font-size:0.85rem">📷 Cambiar foto<Input type="file" id="edit-avatar-input" accept="image/*" hidden></label>
+      </div>
+      <div class="edit-cover-section">
+        <label style="font-size:0.8rem;color:var(--muted);display:block;margin-bottom:0.3rem">Imagen de portada (banner)</label>
+        <div class="input-icon">🖼️ <Input type="file" id="edit-cover-input" accept="image/*"></div>
+        <div id="edit-cover-preview" class="hidden"><img id="edit-cover-img"><button id="edit-cover-remove" class="glass-btn" style="position:absolute;top:0.3rem;right:0.3rem;width:1.8rem;height:1.8rem;font-size:0.8rem">✕</button></div>
+      </div>
+      <div class="input-icon">📝 <input type="text" id="edit-bio" placeholder="Biografía"></div>
+      <div class="input-icon">📍 <input type="text" id="edit-location" placeholder="Ubicación"></div>
+      <div class="input-icon">🔗 <input type="url" id="edit-website" placeholder="Sitio web (opcional)"></div>
+      <button id="btn-save-profile" class="auth-btn" style="margin-top:0.75rem">💾 Guardar Cambios</button>
+    </div>
+  </main>
+
+  <!-- ===== VIEW: SETTINGS ===== -->
+  <main id="view-settings" class="view hidden">
+    <div class="edit-header">
+      <button class="glass-btn back-btn">←</button>
+      <h3>Configuración</h3>
+      <span></span>
+    </div>
+
+    <div class="settings-section glass">
+      <label class="settings-label">Apariencia</label>
+      <div class="settings-row">
+        <span>🌙 Tema oscuro</span>
+        <label class="toggle">
+          <input type="checkbox" id="theme-toggle" checked>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="settings-row">
+        <span>🔵 Modo acento</span>
+        <div class="color-options">
+          <span class="color-dot active" data-color="default" style="background:linear-gradient(135deg,#2ecc71,#27ae60)"></span>
+          <span class="color-dot" data-color="blue" style="background:linear-gradient(135deg,#3498db,#2980b9)"></span>
+          <span class="color-dot" data-color="purple" style="background:linear-gradient(135deg,#9b59b6,#8e44ad)"></span>
+          <span class="color-dot" data-color="orange" style="background:linear-gradient(135deg,#e67e22,#d35400)"></span>
+          <span class="color-dot" data-color="pink" style="background:linear-gradient(135deg,#e91e63,#c2185b)"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section glass">
+      <label class="settings-label">Cuenta</label>
+      <div class="settings-row">
+        <span>👤 Nombre de usuario</span>
+        <span class="settings-value" id="settings-username">-</span>
+      </div>
+      <div class="settings-row">
+        <span>📧 Email</span>
+        <span class="settings-value" id="settings-email">-</span>
+      </div>
+      <div class="settings-row">
+        <span>📅 Miembro desde</span>
+        <span class="settings-value" id="settings-joindate">-</span>
+      </div>
+      <div class="settings-row" style="border:none;padding-bottom:0">
+        <span>🗑️ Datos</span>
+        <button id="btn-clear-data" class="auth-btn secondary" style="padding:0.4rem 0.8rem;font-size:0.75rem;width:auto">Resetear datos</button>
+      </div>
+    </div>
+
+    <div class="settings-section glass">
+      <label class="settings-label">Información</label>
+      <div class="settings-row" style="border:none">
+        <span>📱 Versión</span>
+        <span class="settings-value">WeedForum v2.0</span>
+      </div>
+      <div style="text-align:center;padding:0.5rem 0 0;font-size:0.7rem;color:var(--muted)">
+        Comunidad Cannábica 🌿 — Todos los derechos reservados
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== VIEW: ALL USERS DIRECTORY ===== -->
+  <main id="view-users" class="view hidden">
+    <div class="edit-header">
+      <button class="glass-btn back-btn">←</button>
+      <h3>Usuarios</h3>
+      <span></span>
+    </div>
+    <div class="explore-search">
+      <div class="input-icon" style="flex:1">🔍 <input type="text" id="users-search" placeholder="Buscar usuarios..."></div>
+    </div>
+    <div id="users-directory"></div>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav id="bottom-nav">
+    <button class="active" data-view="feed">🏠<span>Inicio</span></button>
+    <button data-view="explore">🔍<span>Explorar</span></button>
+    <button data-view="create">➕<span>Publicar</span></button>
+    <button data-view="notifications">🔔<span>Notis</span></button>
+    <button data-view="profile">👤<span>Perfil</span></button>
+  </nav>
+
+</div>
+
+<!-- ===== OVERLAY ===== -->
+<div id="overlay" class="hidden"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
