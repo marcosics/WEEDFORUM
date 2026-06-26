@@ -17,18 +17,18 @@
     <h2 class="auth-title">WeedForum</h2>
     <p class="auth-sub">Comunidad Cannábica</p>
 
-    <form id="login-form" class="auth-form">
-      <div class="input-icon">👤 <input type="text" id="login-username" placeholder="Usuario" required autocomplete="username"></div>
-      <div class="input-icon">🔒 <input type="password" id="login-password" placeholder="Contraseña" required autocomplete="current-password"></div>
+    <form id="login-form" class="auth-form" novalidate>
+      <div class="input-icon">👤 <input type="text" id="login-username" placeholder="Usuario" autocomplete="username"></div>
+      <div class="input-icon">🔒 <input type="password" id="login-password" placeholder="Contraseña" autocomplete="current-password"></div>
       <button type="submit" class="auth-btn">Iniciar Sesión</button>
       <p class="auth-switch">¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a></p>
     </form>
 
-    <form id="register-form" class="auth-form hidden">
-      <div class="input-icon">👤 <input type="text" id="reg-username" placeholder="Nombre de usuario" required autocomplete="off"></div>
-      <div class="input-icon">📧 <input type="email" id="reg-email" placeholder="Correo electrónico" required autocomplete="email"></div>
-      <div class="input-icon">🔒 <input type="password" id="reg-password" placeholder="Contraseña" required autocomplete="new-password"></div>
-      <div class="input-icon">🔒 <input type="password" id="reg-confirm" placeholder="Confirmar contraseña" required autocomplete="new-password"></div>
+    <form id="register-form" class="auth-form hidden" novalidate>
+      <div class="input-icon">👤 <input type="text" id="reg-username" placeholder="Nombre de usuario" autocomplete="off"></div>
+      <div class="input-icon">📧 <input type="email" id="reg-email" placeholder="Correo electrónico" autocomplete="email"></div>
+      <div class="input-icon">🔒 <input type="password" id="reg-password" placeholder="Contraseña (mín. 4 caracteres)" autocomplete="new-password"></div>
+      <div class="input-icon">🔒 <input type="password" id="reg-confirm" placeholder="Confirmar contraseña" autocomplete="new-password"></div>
       <button type="submit" class="auth-btn">Crear Cuenta</button>
       <p class="auth-switch">¿Ya tienes cuenta? <a href="#" id="show-login">Inicia Sesión</a></p>
     </form>

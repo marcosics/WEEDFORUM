@@ -321,6 +321,10 @@ const App = {
   },
 
   showView(viewName) {
+    if (viewName==='feed') {
+      const activeTab = document.querySelector('.feed-tabs .tab.active');
+      this.renderFeed(activeTab?activeTab.dataset.feed:'latest');
+    }
     if (viewName==='profile') { this.renderProfile(); }
     if (viewName==='notifications') { this.renderNotifications(); }
     if (viewName==='strains') { this.renderStrains('all'); }
