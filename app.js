@@ -1,72 +1,95 @@
-// ===== STRAIN DATABASE =====
 const STRAINS = [
   { id:'og-kush', name:'OG Kush', type:'hybrid', thc:'19-25%', cbd:'0.1%', flavor:'Pino, Tierra, Cítrico', effects:'Euforia, Relajación, Felicidad', emoji:'🌲', desc:'La OG Kush es una de las cepas más icónicas del mundo. Potente híbrido con aroma terroso y toques cítricos.' },
-  { id:'blue-dream', name:'Blue Dream', type:'hybrid', thc:'17-24%', cbd:'0.1%', flavor:'Baya, Dulce, Hierbas', effects:'Creatividad, Euforia, Relajación', emoji:'💙', desc:'Híbrido clásico que combina la genética Blueberry con Haze. Perfecta para uso diurno.' },
-  { id:'sour-diesel', name:'Sour Diesel', type:'sativa', thc:'20-25%', cbd:'0.1%', flavor:'Diesel, Cítrico, Picante', effects:'Energía, Euforia, Social', emoji:'⛽', desc:'Sativa legendaria con aroma distintivo a diésel. Efecto energizante y cerebral.' },
-  { id:'northern-lights', name:'Northern Lights', type:'indica', thc:'16-21%', cbd:'0.1%', flavor:'Pino, Tierra, Dulce', effects:'Relajación Profunda, Sueño, Calma', emoji:'🌌', desc:'Indica pura de culto. Relajación corporal intensa, ideal para la noche.' },
-  { id:'white-widow', name:'White Widow', type:'hybrid', thc:'18-25%', cbd:'0.1%', flavor:'Tierra, Pino, Floral', effects:'Creatividad, Euforia, Relajación', emoji:'🕸️', desc:'Híbrido balanceado famoso por sus cogollos cubiertos de tricomas blancos.' },
-  { id:'girl-scout-cookies', name:'Girl Scout Cookies', type:'hybrid', thc:'19-28%', cbd:'0.1%', flavor:'Dulce, Menta, Tierra', effects:'Euforia, Relajación, Felicidad', emoji:'🍪', desc:'Híbrido potente con perfil de sabor dulce y efectos equilibrados.' },
-  { id:'pineapple-express', name:'Pineapple Express', type:'hybrid', thc:'18-25%', cbd:'0.1%', flavor:'Piña, Tropical, Dulce', effects:'Felicidad, Energía, Creatividad', emoji:'🍍', desc:'Híbrido tropical con aroma a piña fresca. Efecto edificante.' },
-  { id:'granddaddy-purple', name:'Granddaddy Purple', type:'indica', thc:'17-23%', cbd:'0.1%', flavor:'Uva, Baya, Dulce', effects:'Relajación, Sueño, Calma', emoji:'🍇', desc:'Indica premium con cogollos morados y aroma a uva. Relajación total.' },
-  { id:'jack-herer', name:'Jack Herer', type:'sativa', thc:'18-24%', cbd:'0.1%', flavor:'Pino, Especias, Cítrico', effects:'Creatividad, Euforia, Enfoque', emoji:'🌲', desc:'Sativa nombrada en honor al activista. Efecto claro y creativo.' },
-  { id:'green-crack', name:'Green Crack', type:'sativa', thc:'15-22%', cbd:'0.1%', flavor:'Cítrico, Mango, Dulce', effects:'Energía, Enfoque, Felicidad', emoji:'💚', desc:'Sativa energizante con sabor cítrico. Perfecta para empezar el día.' },
-  { id:'purple-haze', name:'Purple Haze', type:'sativa', thc:'16-23%', cbd:'0.1%', flavor:'Baya, Dulce, Tierra', effects:'Euforia, Creatividad, Alegría', emoji:'🟣', desc:'Sativa clásica de los 70. Efecto eufórico y cerebral.' },
-  { id:'ak-47', name:'AK-47', type:'hybrid', thc:'18-25%', cbd:'0.1%', flavor:'Tierra, Pino, Agrio', effects:'Euforia, Relajación, Felicidad', emoji:'🔥', desc:'Híbrido potent con efecto complejo. Relajación cerebral y corporal.' },
-  { id:'bruce-banner', name:'Bruce Banner', type:'hybrid', thc:'20-29%', cbd:'0.1%', flavor:'Dulce, Tierra, Diesel', effects:'Euforia Intensa, Creatividad, Felicidad', emoji:'💪', desc:'Híbrido extremadamente potente. Efecto explosivo.' },
-  { id:'gelato', name:'Gelato', type:'hybrid', thc:'20-25%', cbd:'0.1%', flavor:'Dulce, Crema, Frutal', effects:'Relajación, Euforia, Felicidad', emoji:'🍦', desc:'Híbrido dulce y cremoso. Efecto equilibrado y placentero.' },
-  { id:'zkittlez', name:'Zkittlez', type:'hybrid', thc:'20-25%', cbd:'0.1%', flavor:'Fruta, Dulce, Tropical', effects:'Relajación, Felicidad, Calma', emoji:'🌈', desc:'Cepa con perfil de sabor afrutado único. Efecto suave y feliz.' },
-  { id:'wedding-cake', name:'Wedding Cake', type:'hybrid', thc:'20-27%', cbd:'0.1%', flavor:'Dulce, Vainilla, Tierra', effects:'Euforia, Relajación, Felicidad', emoji:'🎂', desc:'Híbrido dulce y potente. Relajación profunda.' },
-  { id:'runtz', name:'Runtz', type:'hybrid', thc:'19-29%', cbd:'0.1%', flavor:'Dulce, Frutal, Cremoso', effects:'Euforia, Felicidad, Relajación', emoji:'🍬', desc:'Híbrido trendy con sabor a caramelo frutal.' },
-  { id:'lemon-haze', name:'Lemon Haze', type:'sativa', thc:'17-25%', cbd:'0.1%', flavor:'Limón, Cítrico, Dulce', effects:'Energía, Enfoque, Creatividad', emoji:'🍋', desc:'Sativa cítrica con aroma a limón. Efecto edificante.' },
-  { id:'blue-cheese', name:'Blue Cheese', type:'indica', thc:'17-23%', cbd:'0.1%', flavor:'Queso, Baya, Dulce', effects:'Relajación, Sueño, Calma', emoji:'🧀', desc:'Indica con aroma único a queso azul y bayas.' },
-  { id:'amnesia-haze', name:'Amnesia Haze', type:'sativa', thc:'20-25%', cbd:'0.1%', flavor:'Cítrico, Tierra, Especias', effects:'Euforia, Energía, Creatividad', emoji:'🌀', desc:'Sativa galardonada. Efecto cerebral potente y duradero.' },
-  { id:'mango-haze', name:'Mango Haze', type:'sativa', thc:'18-22%', cbd:'0.1%', flavor:'Mango, Tropical, Dulce', effects:'Creatividad, Euforia, Energía', emoji:'🥭', desc:'Sativa tropical con sabor a mango. Perfecta para el día.' },
-  { id:'strawberry-cough', name:'Strawberry Cough', type:'sativa', thc:'17-23%', cbd:'0.1%', flavor:'Fresa, Dulce, Tierra', effects:'Euforia, Social, Energía', emoji:'🍓', desc:'Sativa con aroma a fresa fresca. Efecto social y alegre.' },
-  { id:'bubba-kush', name:'Bubba Kush', type:'indica', thc:'15-22%', cbd:'0.1%', flavor:'Café, Chocolate, Tierra', effects:'Relajación, Sueño, Calma', emoji:'☕', desc:'Indica pesada con efectos sedantes. Ideal para insomnio.' },
-  { id:'durban-poison', name:'Durban Poison', type:'sativa', thc:'16-22%', cbd:'0.1%', flavor:'Pino, Anís, Especias', effects:'Energía, Enfoque, Euforia', emoji:'☀️', desc:'Sativa pura africana. Efecto limpio y energizante.' },
-  { id:'critical-mass', name:'Critical Mass', type:'indica', thc:'18-23%', cbd:'0.1%', flavor:'Tierra, Dulce, Floral', effects:'Relajación, Calma, Sedación', emoji:'📦', desc:'Indica de alto rendimiento. Efecto relajante y medicinal.' }
+  { id:'blue-dream', name:'Blue Dream', type:'hybrid', thc:'17-24%', cbd:'0.1%', flavor:'Baya, Dulce, Hierbas', effects:'Creatividad, Euforia, Relajación', emoji:'💙', desc:'Híbrido clásico que combina la genética Blueberry con Haze.' },
+  { id:'sour-diesel', name:'Sour Diesel', type:'sativa', thc:'20-25%', cbd:'0.1%', flavor:'Diesel, Cítrico, Picante', effects:'Energía, Euforia, Social', emoji:'⛽', desc:'Sativa legendaria con aroma distintivo a diésel.' },
+  { id:'northern-lights', name:'Northern Lights', type:'indica', thc:'16-21%', cbd:'0.1%', flavor:'Pino, Tierra, Dulce', effects:'Relajación Profunda, Sueño, Calma', emoji:'🌌', desc:'Indica pura de culto. Relajación corporal intensa.' },
+  { id:'white-widow', name:'White Widow', type:'hybrid', thc:'18-25%', cbd:'0.1%', flavor:'Tierra, Pino, Floral', effects:'Creatividad, Euforia, Relajación', emoji:'🕸️', desc:'Híbrido balanceado famoso por sus cogollos cubiertos de tricomas.' },
+  { id:'girl-scout-cookies', name:'Girl Scout Cookies', type:'hybrid', thc:'19-28%', cbd:'0.1%', flavor:'Dulce, Menta, Tierra', effects:'Euforia, Relajación, Felicidad', emoji:'🍪', desc:'Híbrido potente con perfil de sabor dulce.' },
+  { id:'pineapple-express', name:'Pineapple Express', type:'hybrid', thc:'18-25%', cbd:'0.1%', flavor:'Piña, Tropical, Dulce', effects:'Felicidad, Energía, Creatividad', emoji:'🍍', desc:'Híbrido tropical con aroma a piña fresca.' },
+  { id:'granddaddy-purple', name:'Granddaddy Purple', type:'indica', thc:'17-23%', cbd:'0.1%', flavor:'Uva, Baya, Dulce', effects:'Relajación, Sueño, Calma', emoji:'🍇', desc:'Indica premium con cogollos morados.' },
+  { id:'jack-herer', name:'Jack Herer', type:'sativa', thc:'18-24%', cbd:'0.1%', flavor:'Pino, Especias, Cítrico', effects:'Creatividad, Euforia, Enfoque', emoji:'🌲', desc:'Sativa en honor al activista. Efecto claro y creativo.' },
+  { id:'green-crack', name:'Green Crack', type:'sativa', thc:'15-22%', cbd:'0.1%', flavor:'Cítrico, Mango, Dulce', effects:'Energía, Enfoque, Felicidad', emoji:'💚', desc:'Sativa energizante. Perfecta para empezar el día.' },
+  { id:'purple-haze', name:'Purple Haze', type:'sativa', thc:'16-23%', cbd:'0.1%', flavor:'Baya, Dulce, Tierra', effects:'Euforia, Creatividad, Alegría', emoji:'🟣', desc:'Sativa clásica de los 70.' },
+  { id:'ak-47', name:'AK-47', type:'hybrid', thc:'18-25%', cbd:'0.1%', flavor:'Tierra, Pino, Agrio', effects:'Euforia, Relajación, Felicidad', emoji:'🔥', desc:'Híbrido potente con efecto complejo.' },
+  { id:'bruce-banner', name:'Bruce Banner', type:'hybrid', thc:'20-29%', cbd:'0.1%', flavor:'Dulce, Tierra, Diesel', effects:'Euforia Intensa, Creatividad, Felicidad', emoji:'💪', desc:'Híbrido extremadamente potente.' },
+  { id:'gelato', name:'Gelato', type:'hybrid', thc:'20-25%', cbd:'0.1%', flavor:'Dulce, Crema, Frutal', effects:'Relajación, Euforia, Felicidad', emoji:'🍦', desc:'Híbrido dulce y cremoso.' },
+  { id:'zkittlez', name:'Zkittlez', type:'hybrid', thc:'20-25%', cbd:'0.1%', flavor:'Fruta, Dulce, Tropical', effects:'Relajación, Felicidad, Calma', emoji:'🌈', desc:'Cepa con perfil de sabor afrutado único.' },
+  { id:'wedding-cake', name:'Wedding Cake', type:'hybrid', thc:'20-27%', cbd:'0.1%', flavor:'Dulce, Vainilla, Tierra', effects:'Euforia, Relajación, Felicidad', emoji:'🎂', desc:'Híbrido dulce y potente.' },
+  { id:'runtz', name:'Runtz', type:'hybrid', thc:'19-29%', cbd:'0.1%', flavor:'Dulce, Frutal, Cremoso', effects:'Euforia, Felicidad, Relajación', emoji:'🍬', desc:'Híbrido trendy con sabor a caramelo.' },
+  { id:'lemon-haze', name:'Lemon Haze', type:'sativa', thc:'17-25%', cbd:'0.1%', flavor:'Limón, Cítrico, Dulce', effects:'Energía, Enfoque, Creatividad', emoji:'🍋', desc:'Sativa cítrica con aroma a limón.' },
+  { id:'blue-cheese', name:'Blue Cheese', type:'indica', thc:'17-23%', cbd:'0.1%', flavor:'Queso, Baya, Dulce', effects:'Relajación, Sueño, Calma', emoji:'🧀', desc:'Indica con aroma único a queso azul.' },
+  { id:'amnesia-haze', name:'Amnesia Haze', type:'sativa', thc:'20-25%', cbd:'0.1%', flavor:'Cítrico, Tierra, Especias', effects:'Euforia, Energía, Creatividad', emoji:'🌀', desc:'Sativa galardonada. Efecto cerebral potente.' },
+  { id:'mango-haze', name:'Mango Haze', type:'sativa', thc:'18-22%', cbd:'0.1%', flavor:'Mango, Tropical, Dulce', effects:'Creatividad, Euforia, Energía', emoji:'🥭', desc:'Sativa tropical con sabor a mango.' },
+  { id:'strawberry-cough', name:'Strawberry Cough', type:'sativa', thc:'17-23%', cbd:'0.1%', flavor:'Fresa, Dulce, Tierra', effects:'Euforia, Social, Energía', emoji:'🍓', desc:'Sativa con aroma a fresa fresca.' },
+  { id:'bubba-kush', name:'Bubba Kush', type:'indica', thc:'15-22%', cbd:'0.1%', flavor:'Café, Chocolate, Tierra', effects:'Relajación, Sueño, Calma', emoji:'☕', desc:'Indica pesada con efectos sedantes.' },
+  { id:'durban-poison', name:'Durban Poison', type:'sativa', thc:'16-22%', cbd:'0.1%', flavor:'Pino, Anís, Especias', effects:'Energía, Enfoque, Euforia', emoji:'☀️', desc:'Sativa pura africana. Efecto limpio.' },
+  { id:'critical-mass', name:'Critical Mass', type:'indica', thc:'18-23%', cbd:'0.1%', flavor:'Tierra, Dulce, Floral', effects:'Relajación, Calma, Sedación', emoji:'📦', desc:'Indica de alto rendimiento.' }
 ];
 
-const DEFAULT_AVATARS = ['🌿','🍃','🔥','💚','🌲','🍀','☘️','🌱','🌸','🌈','⭐','💫','🍄','🌻','🍂'];
+const ADJ = ['Feliz','Verde','Azul','Dulce','Fresco','Fuerte','Suave','Rápido','Alto','Largo','Frío','Cálido','Claro','Nuevo','Joven','Libre','Activo','Raro','Simple','Sabio','Loco','Bueno','Mágico','Único','Solar','Ágil','Feroz','Noble','Justo','Tranquilo','Alegre','Brillante','Profundo','Salvaje','Amable','Fiel','Sutil','Rústico','Denso','Firme','Leal','Oscuro','Corto','Santo','Puro','Falso','Real','Doble','Leve','Fixed','Lento','Tonto','Listo','Franco','Grato','Digno','Iluso','Lúcido','Vasto','Yerto','Zonzo','Hábil','Erguido','Funesto','Glorioso','Huraño','Indócil','Jocoso','Lacónico','Magno'];
+const NOUNS = ['Panda','Zorro','Lobo','Tigre','Águila','Tiburón','Gato','León','Oso','Koala','Lince','Búho','Halcón','Foca','Ciervo','Toro','Cabra','Rana','Loro','Pato','Cisne','Cuervo','Topo','Erizo','Ardilla','Nutria','Hurón','Tejón','Pantera','Jaguar','Delfín','Ballena','Pulpo','Mariposa','Abeja','Hormiga','Escarabajo','Luciérnaga','Pingüino','Gaviota','Camello','Suricata','Mapache','Canguro','Wombat','Armadillo','Ornitorrinco','Buitre','Guepardo','Hiena','Morsa','Narval','Ocelote','Puma','Yak','Zebra','Mofeta','Alce','Gamo','Lémur','Tarsio','Ualabí','Vicuña','Antílope','Bisonte','Cóndor','Dromedario','Flamenco','Gorila','Hipopótamo','Iguana','Jirafa','Kiwi','Loro','Manatí','Ñandú','Oso','Perezoso','Quetzal','Rinoceronte','Salamandra','Tapir','Urogallo','Víbora','Yaguareté'];
 
-// ===== APP =====
 const App = {
   state: { currentUser:null, users:[], posts:[], notifications:[], nextId:1, theme:'dark', accent:'default' },
 
   init() {
     this.loadData();
     if (this.state.users.length===0) this.seedData();
+    this.ensureAnonymousUser();
+    this.cacheDom();
     this.applyTheme();
     this.applyAccent();
-    this.cacheDom();
     this.bindEvents();
     if (this.state.currentUser) {
-      this.showApp();
+      this.updateBadge();
       this.showView('feed');
     } else {
-      document.getElementById('auth-screen').classList.remove('hidden');
+      this.showView('feed');
     }
     this.populateStrainSelect();
   },
 
-  // ----- DOM CACHE -----
+  ensureAnonymousUser() {
+    if (!this.state.currentUser) {
+      const anon = this.generateAnonymousUser();
+      this.state.users.push(anon);
+      this.state.currentUser = anon.id;
+      this.saveData();
+    }
+  },
+
+  generateAnonymousUser() {
+    const adj = ADJ[Math.floor(Math.random()*ADJ.length)];
+    const noun = NOUNS[Math.floor(Math.random()*NOUNS.length)];
+    const num = Math.floor(Math.random()*900)+100;
+    const username = adj+noun+num;
+    return {
+      id: this.state.nextId++, username, email:'', password:'',
+      avatar: DEFAULT_AVATARS[Math.floor(Math.random()*DEFAULT_AVATARS.length)],
+      cover: '', bio: 'Usuario anónimo 🌿', location: '', website: '',
+      followers: [], following: [], joinDate: new Date().toISOString(), isAnonymous: true
+    };
+  },
+
+  get DEFAULT_AVATARS() { return ['🌿','🍃','🔥','💚','🌲','🍀','☘️','🌱','🌸','🌈','⭐','💫','🍄','🌻','🍂']; },
+
   cacheDom() {
     this.el = {};
-    const ids = ['auth-screen','app','toast','overlay','view-feed','view-explore','view-create','view-notifications',
-      'view-profile','view-strains','view-strain-detail','view-post-detail','view-edit-profile','view-settings','view-users',
+    const ids = ['app','toast','overlay','auth-modal','view-feed','view-explore','view-create','view-notifications',
+      'view-profile','view-strains','view-strain-detail','view-post-detail','view-edit-profile','view-settings',
       'feed-content','explore-content','notif-content','profile-posts','strains-grid','strain-detail-content',
-      'post-detail-content','users-directory',
+      'post-detail-content',
       'login-form','register-form','login-username','login-password','reg-username','reg-email','reg-password','reg-confirm',
       'show-register','show-login','post-content','post-strain','post-image','post-image-preview','post-image-img','post-image-remove',
       'btn-post','btn-comment','btn-logout','btn-edit-profile','btn-save-profile','btn-search-toggle','btn-theme-toggle',
-      'btn-clear-data','explore-search','strains-search','users-search','comment-input','theme-toggle',
+      'btn-auth-modal','btn-reroll','explore-search','strains-search','comment-input','theme-toggle',
       'create-avatar','create-username',
       'profile-avatar','profile-cover','profile-name','profile-bio','profile-location','profile-joined',
       'profile-posts-count','profile-followers-count','profile-following-count','profile-dropdown-btn','profile-dropdown',
       'edit-bio','edit-location','edit-website','edit-avatar-input','edit-cover-input','edit-cover-preview','edit-cover-img',
       'edit-cover-remove','edit-current-avatar',
-      'settings-username','settings-email','settings-joindate',
-      'header-title'];
+      'settings-username','settings-email','settings-joindate','settings-status-text','settings-secure-row','settings-reroll-row',
+      'user-badge','badge-avatar','badge-name','header-title'];
     ids.forEach(id => { this.el[id] = document.getElementById(id); });
     this.el.navBtns = document.querySelectorAll('#bottom-nav button');
     this.el.tabs = document.querySelectorAll('.feed-tabs .tab');
@@ -78,12 +101,12 @@ const App = {
     this.el.colorDots = document.querySelectorAll('.color-dot');
   },
 
-  // ----- EVENTS -----
   bindEvents() {
     this.el['login-form'].addEventListener('submit', e => { e.preventDefault(); this.login(); });
     this.el['register-form'].addEventListener('submit', e => { e.preventDefault(); this.register(); });
     this.el['show-register'].addEventListener('click', e => { e.preventDefault(); this.toggleAuth('register'); });
     this.el['show-login'].addEventListener('click', e => { e.preventDefault(); this.toggleAuth('login'); });
+    this.el['auth-modal'].querySelector('.modal-close').addEventListener('click', () => this.closeAuthModal());
 
     this.el.navBtns.forEach(btn => {
       btn.addEventListener('click', () => this.showView(btn.dataset.view));
@@ -140,14 +163,12 @@ const App = {
       const active = document.querySelector('.strain-filter.active');
       this.renderStrains(active ? active.dataset.filter : 'all');
     });
-    this.el['users-search'].addEventListener('input', () => this.renderUsersDirectory());
     this.el['btn-search-toggle'].addEventListener('click', () => this.showView('explore'));
     this.el['btn-theme-toggle'].addEventListener('click', () => this.toggleTheme());
 
     this.el['btn-logout'].addEventListener('click', () => this.logout());
     this.el['btn-edit-profile'].addEventListener('click', () => this.showView('edit-profile'));
     this.el['btn-save-profile'].addEventListener('click', () => this.saveProfile());
-    this.el['btn-clear-data'].addEventListener('click', () => this.clearAllData());
 
     this.el['btn-comment'].addEventListener('click', () => this.commentOnPost());
 
@@ -163,6 +184,18 @@ const App = {
       });
     });
 
+    this.el['user-badge'].addEventListener('click', () => {
+      const u = this.currentUser;
+      if (u && u.isAnonymous) {
+        this.openAuthModal();
+      } else {
+        this.showView('settings');
+      }
+    });
+
+    this.el['btn-auth-modal'].addEventListener('click', () => this.openAuthModal());
+    this.el['btn-reroll'].addEventListener('click', () => this.rerollUsername());
+
     this.el['profile-dropdown-btn'].addEventListener('click', e => {
       e.stopPropagation();
       this.el['profile-dropdown'].classList.toggle('hidden');
@@ -172,15 +205,13 @@ const App = {
     this.el['profile-dropdown'].addEventListener('click', e => {
       const item = e.target.closest('.dropdown-item');
       if (!item) return;
-      const action = item.dataset.action;
-      if (action==='share') {
+      if (item.dataset.action==='share') {
         navigator.clipboard?.writeText(window.location.href);
         this.toast('Enlace copiado');
-      } else if (action==='copy') {
-        const name = this.el['profile-name'].textContent;
-        navigator.clipboard?.writeText(name);
+      } else if (item.dataset.action==='copy') {
+        navigator.clipboard?.writeText(this.el['profile-name'].textContent);
         this.toast('Usuario copiado');
-      } else if (action==='block') {
+      } else if (item.dataset.action==='block') {
         this.toast('Función no disponible');
       }
       this.el['profile-dropdown'].classList.add('hidden');
@@ -189,6 +220,7 @@ const App = {
 
     this.el.overlay.addEventListener('click', () => {
       this.el['profile-dropdown'].classList.add('hidden');
+      this.el['auth-modal'].classList.add('hidden');
       this.el.overlay.classList.add('hidden');
     });
 
@@ -223,12 +255,24 @@ const App = {
         if (!visible) return;
         if (visible.id==='view-strain-detail') this.showView('strains');
         else if (visible.id==='view-post-detail') this.showView('feed');
-        else if (visible.id==='view-edit-profile'||visible.id==='view-settings'||visible.id==='view-users') this.showView('profile');
+        else if (['view-edit-profile','view-settings'].includes(visible.id)) this.showView('profile');
       });
     });
   },
 
-  // ----- AUTH -----
+  // ----- AUTH MODAL -----
+  openAuthModal() {
+    this.el['auth-modal'].classList.remove('hidden');
+    this.el.overlay.classList.remove('hidden');
+    document.getElementById('login-form').classList.remove('hidden');
+    document.getElementById('register-form').classList.add('hidden');
+  },
+
+  closeAuthModal() {
+    this.el['auth-modal'].classList.add('hidden');
+    this.el.overlay.classList.add('hidden');
+  },
+
   toggleAuth(mode) {
     document.getElementById('login-form').classList.toggle('hidden', mode!=='login');
     document.getElementById('register-form').classList.toggle('hidden', mode!=='register');
@@ -241,21 +285,37 @@ const App = {
     const confirm = this.el['reg-confirm'].value;
     if (!username||!email||!password||!confirm) return this.toast('Completa todos los campos');
     if (password!==confirm) return this.toast('Las contraseñas no coinciden');
-    if (password.length<4) return this.toast('La contraseña debe tener al menos 4 caracteres');
-    if (this.state.users.find(u=>u.username===username)) return this.toast('El usuario ya existe');
+    if (password.length<4) return this.toast('Mínimo 4 caracteres');
+    if (this.state.users.find(u=>u.username===username && u.password)) return this.toast('El usuario ya existe');
+
+    const existing = this.currentUser;
+    if (existing) {
+      const oldName = existing.username;
+      existing.username = username;
+      existing.email = email;
+      existing.password = password;
+      existing.isAnonymous = false;
+      if (!existing.avatar) existing.avatar = this.DEFAULT_AVATARS[Math.floor(Math.random()*this.DEFAULT_AVATARS.length)];
+      this.state.posts.forEach(p => { if (p.userId===existing.id && p.username===oldName) p.username = username; });
+      this.saveData();
+      this.toast('Cuenta creada con éxito');
+      this.closeAuthModal();
+      this.updateBadge();
+      return;
+    }
+
     const user = {
       id: this.state.nextId++, username, email, password,
-      avatar: DEFAULT_AVATARS[Math.floor(Math.random()*DEFAULT_AVATARS.length)],
+      avatar: this.DEFAULT_AVATARS[Math.floor(Math.random()*this.DEFAULT_AVATARS.length)],
       cover: '', bio: '', location: '', website: '', followers: [], following: [],
-      joinDate: new Date().toISOString()
+      joinDate: new Date().toISOString(), isAnonymous: false
     };
     this.state.users.push(user);
     this.state.currentUser = user.id;
     this.saveData();
-    this.el['reg-username'].value=''; this.el['reg-email'].value=''; this.el['reg-password'].value=''; this.el['reg-confirm'].value='';
     this.toast('Cuenta creada con éxito');
-    this.showApp();
-    this.showView('feed');
+    this.closeAuthModal();
+    this.updateBadge();
   },
 
   login() {
@@ -267,20 +327,52 @@ const App = {
     this.saveData();
     this.el['login-username'].value=''; this.el['login-password'].value='';
     this.toast('Bienvenido ' + user.username);
-    this.showApp();
+    this.closeAuthModal();
+    this.updateBadge();
     this.showView('feed');
   },
 
   logout() {
+    if (!confirm('¿Salir de tu cuenta? Volverás al modo anónimo.')) return;
     this.state.currentUser = null;
     this.saveData();
-    this.el.app.classList.add('hidden');
-    document.getElementById('auth-screen').classList.remove('hidden');
-    this.toast('Sesión cerrada');
+    this.ensureAnonymousUser();
+    this.updateBadge();
+    this.toast('Modo anónimo activado');
+    this.showView('feed');
+  },
+
+  rerollUsername() {
+    const u = this.currentUser;
+    if (!u || !u.isAnonymous) return this.toast('Solo disponible en modo anónimo');
+    const newName = this.generateAnonymousUser().username;
+    u.username = newName;
+    // Update posts
+    this.state.posts.forEach(p => { if (p.userId===u.id) p.username = newName; });
+    this.saveData();
+    this.updateBadge();
+    this.toast('Nuevo nombre: @'+newName);
   },
 
   get currentUser() {
     return this.state.users.find(u=>u.id===this.state.currentUser);
+  },
+
+  updateBadge() {
+    const u = this.currentUser;
+    if (!u) return;
+    this.el['badge-avatar'].innerHTML = this.getAvatarHTML(u.avatar);
+    this.el['badge-name'].textContent = '@'+u.username;
+    // Settings
+    if (u.isAnonymous) {
+      this.el['settings-status-text'].textContent = '🎭 Modo anónimo · @'+u.username;
+      this.el['settings-secure-row'].classList.add('hidden');
+      this.el['settings-reroll-row'].classList.remove('hidden');
+    } else {
+      this.el['settings-status-text'].textContent = '🔐 Cuenta registrada · @'+u.username;
+      this.el['settings-secure-row'].classList.remove('hidden');
+      this.el['settings-reroll-row'].classList.add('hidden');
+    }
   },
 
   // ----- THEME -----
@@ -288,26 +380,21 @@ const App = {
     document.documentElement.setAttribute('data-theme', this.state.theme==='light'?'light':'dark');
     if (this.el['theme-toggle']) this.el['theme-toggle'].checked = this.state.theme==='dark';
   },
-
   applyAccent() {
     document.documentElement.setAttribute('data-accent', this.state.accent||'default');
     if (this.el.colorDots) {
       this.el.colorDots.forEach(d => d.classList.toggle('active', d.dataset.color===(this.state.accent||'default')));
     }
   },
-
   toggleTheme() {
-    const next = this.state.theme==='dark'?'light':'dark';
-    this.setTheme(next);
+    this.setTheme(this.state.theme==='dark'?'light':'dark');
   },
-
   setTheme(theme) {
     this.state.theme = theme;
     this.applyTheme();
     this.saveData();
     this.el['btn-theme-toggle'].textContent = theme==='dark'?'🌙':'☀️';
   },
-
   setAccent(color) {
     this.state.accent = color;
     this.applyAccent();
@@ -315,11 +402,6 @@ const App = {
   },
 
   // ----- NAVIGATION -----
-  showApp() {
-    document.getElementById('auth-screen').classList.add('hidden');
-    this.el.app.classList.remove('hidden');
-  },
-
   showView(viewName) {
     if (viewName==='feed') {
       const activeTab = document.querySelector('.feed-tabs .tab.active');
@@ -329,7 +411,6 @@ const App = {
     if (viewName==='notifications') { this.renderNotifications(); }
     if (viewName==='strains') { this.renderStrains('all'); }
     if (viewName==='settings') { this.renderSettings(); }
-    if (viewName==='users') { this.renderUsersDirectory(); }
     if (viewName==='explore') {
       const active = document.querySelector('.explore-tabs .tab.active');
       this.renderExplore(active?active.dataset.explore:'strains');
@@ -337,7 +418,7 @@ const App = {
 
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     const target = document.getElementById('view-'+viewName);
-    if (target) target.classList.add('active');
+    if (target) { target.classList.add('active'); target.classList.remove('hidden'); }
 
     this.el.navBtns.forEach(b => {
       b.classList.toggle('active', b.dataset.view===viewName);
@@ -352,7 +433,7 @@ const App = {
     const u = this.currentUser;
     if (!u) return;
     this.el['create-username'].textContent = '@' + u.username;
-    this.el['create-avatar'].textContent = this.getAvatarHTML(u.avatar);
+    this.el['create-avatar'].innerHTML = this.getAvatarHTML(u.avatar);
     this.populateStrainSelect();
     this.el.typeTags.forEach(t=>t.classList.remove('active'));
     this.el['post-content'].value = '';
@@ -389,7 +470,7 @@ const App = {
 
   createPost() {
     const user = this.currentUser;
-    if (!user) return this.toast('Debes iniciar sesión');
+    if (!user) return;
     const content = this.el['post-content'].value.trim();
     if (!content) return this.toast('Escribe algo para publicar');
     const strainId = this.el['post-strain'].value;
@@ -414,9 +495,8 @@ const App = {
 
   likePost(postId) {
     const user = this.currentUser;
-    if (!user) return this.toast('Debes iniciar sesión');
     const post = this.state.posts.find(p=>p.id===postId);
-    if (!post) return;
+    if (!post||!user) return;
     const idx = post.likes.indexOf(user.id);
     if (idx>-1) { post.likes.splice(idx,1); }
     else {
@@ -426,21 +506,11 @@ const App = {
     this.saveData();
     const activeTab = document.querySelector('.feed-tabs .tab.active');
     if (activeTab) this.renderFeed(activeTab.dataset.feed);
-    else {
-      document.querySelectorAll('.view.active .post-action[data-action="like"]').forEach(el => {
-        if (parseInt(el.dataset.id)===postId) {
-          const liked = post.likes.includes(user.id);
-          el.classList.toggle('liked', liked);
-          el.querySelector('.icon').textContent = liked?'❤️':'🤍';
-          el.querySelector('.count').textContent = post.likes.length;
-        }
-      });
-    }
   },
 
   commentOnPost() {
     const user = this.currentUser;
-    if (!user) return this.toast('Debes iniciar sesión');
+    if (!user) return;
     const text = this.el['comment-input'].value.trim();
     if (!text) return this.toast('Escribe un comentario');
     const postId = parseInt(this.el['comment-input'].dataset.postId);
@@ -480,7 +550,6 @@ const App = {
     return avatar;
   },
 
-  // ----- NOTIFICATIONS -----
   addNotification(userId, type, fromUsername, postId) {
     this.state.notifications.push({ id:this.state.nextId++, userId, type, fromUsername, postId, read:false, timestamp:Date.now() });
     this.saveData();
@@ -574,10 +643,7 @@ const App = {
     if (type==='users') {
       let users = this.state.users.filter(u => u.id!==(this.currentUser?this.currentUser.id:-1));
       if (query) users = users.filter(u => u.username.toLowerCase().includes(query));
-      if (users.length===0) {
-        container.innerHTML = `<div class="empty"><div class="big">👤</div>No se encontraron usuarios</div>`;
-        return;
-      }
+      if (users.length===0) { container.innerHTML = '<div class="empty"><div class="big">👤</div>No se encontraron usuarios</div>'; return; }
       container.innerHTML = users.map(u => {
         const isFollowing = this.currentUser && this.currentUser.following.includes(u.id);
         return `<div class="user-card-mini" data-user-id="${u.id}">
@@ -590,103 +656,63 @@ const App = {
         </div>`;
       }).join('');
       container.querySelectorAll('.user-card-mini').forEach(el => {
-        el.addEventListener('click', e => {
-          if (e.target.closest('.follow-btn-sm')) return;
-          this.showUserProfile(parseInt(el.dataset.userId));
-        });
+        el.addEventListener('click', e => { if (e.target.closest('.follow-btn-sm')) return; this.showUserProfile(parseInt(el.dataset.userId)); });
       });
       container.querySelectorAll('.follow-btn-sm').forEach(btn => {
-        btn.addEventListener('click', e => {
-          e.stopPropagation();
-          const card = btn.closest('.user-card-mini');
-          this.toggleFollow(parseInt(card.dataset.userId));
-        });
+        btn.addEventListener('click', e => { e.stopPropagation(); const card = btn.closest('.user-card-mini'); this.toggleFollow(parseInt(card.dataset.userId)); });
       });
-
     } else if (type==='posts') {
       let posts = [...this.state.posts];
       if (query) posts = posts.filter(p => p.content.toLowerCase().includes(query) || (p.strain&&p.strain.name.toLowerCase().includes(query)));
       posts.sort((a,b)=>b.timestamp-a.timestamp);
-      if (posts.length===0) {
-        container.innerHTML = `<div class="empty"><div class="big">📝</div>No se encontraron publicaciones</div>`;
-        return;
-      }
+      if (posts.length===0) { container.innerHTML = '<div class="empty"><div class="big">📝</div>No se encontraron publicaciones</div>'; return; }
       container.innerHTML = posts.slice(0,30).map(p => this.renderPostHTML(p)).join('');
       this.bindPostEvents(container);
-
     } else {
       let strains = [...STRAINS];
       if (query) strains = strains.filter(s => s.name.toLowerCase().includes(query) || s.flavor.toLowerCase().includes(query));
-      if (strains.length===0) {
-        container.innerHTML = `<div class="empty"><div class="big">🌿</div>No se encontraron cepas</div>`;
-        return;
-      }
-      container.innerHTML = `<div class="strain-grid">${strains.map(s => `
-        <div class="strain-card" data-strain-id="${s.id}">
-          <div class="strain-card-emoji">${s.emoji}</div>
-          <div class="strain-card-name">${s.name}</div>
-          <span class="strain-card-type ${s.type}">${s.type==='sativa'?'🌞 Sativa':s.type==='indica'?'🌙 Indica':'⚡ Híbrido'}</span>
-          <div class="strain-card-thc">THC: ${s.thc}</div>
-        </div>`).join('')}</div>`;
-      container.querySelectorAll('.strain-card').forEach(el => {
-        el.addEventListener('click', () => this.showStrainDetail(el.dataset.strainId));
-      });
+      if (strains.length===0) { container.innerHTML = '<div class="empty"><div class="big">🌿</div>No se encontraron cepas</div>'; return; }
+      container.innerHTML = `<div class="strain-grid">${strains.map(s => `<div class="strain-card" data-strain-id="${s.id}">
+        <div class="strain-card-emoji">${s.emoji}</div>
+        <div class="strain-card-name">${s.name}</div>
+        <span class="strain-card-type ${s.type}">${s.type==='sativa'?'🌞 Sativa':s.type==='indica'?'🌙 Indica':'⚡ Híbrido'}</span>
+        <div class="strain-card-thc">THC: ${s.thc}</div>
+      </div>`).join('')}</div>`;
+      container.querySelectorAll('.strain-card').forEach(el => { el.addEventListener('click', () => this.showStrainDetail(el.dataset.strainId)); });
     }
   },
 
-  // ----- RENDER: STRAINS -----
   renderStrains(filter) {
     const query = this.el['strains-search'].value.trim().toLowerCase();
     const container = this.el['strains-grid'];
     let strains = [...STRAINS];
     if (filter!=='all') strains = strains.filter(s => s.type===filter);
     if (query) strains = strains.filter(s => s.name.toLowerCase().includes(query));
-    if (strains.length===0) {
-      container.innerHTML = `<div class="empty"><div class="big">🌿</div>No se encontraron cepas</div>`;
-      return;
-    }
-    container.innerHTML = `<div class="strain-grid">${strains.map(s => `
-      <div class="strain-card" data-strain-id="${s.id}">
-        <div class="strain-card-emoji">${s.emoji}</div>
-        <div class="strain-card-name">${s.name}</div>
-        <span class="strain-card-type ${s.type}">${s.type==='sativa'?'🌞 Sativa':s.type==='indica'?'🌙 Indica':'⚡ Híbrido'}</span>
-        <div class="strain-card-thc">THC: ${s.thc}</div>
-      </div>`).join('')}</div>`;
-    container.querySelectorAll('.strain-card').forEach(el => {
-      el.addEventListener('click', () => this.showStrainDetail(el.dataset.strainId));
-    });
+    if (strains.length===0) { container.innerHTML = '<div class="empty"><div class="big">🌿</div>No se encontraron cepas</div>'; return; }
+    container.innerHTML = `<div class="strain-grid">${strains.map(s => `<div class="strain-card" data-strain-id="${s.id}">
+      <div class="strain-card-emoji">${s.emoji}</div>
+      <div class="strain-card-name">${s.name}</div>
+      <span class="strain-card-type ${s.type}">${s.type==='sativa'?'🌞 Sativa':s.type==='indica'?'🌙 Indica':'⚡ Híbrido'}</span>
+      <div class="strain-card-thc">THC: ${s.thc}</div>
+    </div>`).join('')}</div>`;
+    container.querySelectorAll('.strain-card').forEach(el => { el.addEventListener('click', () => this.showStrainDetail(el.dataset.strainId)); });
   },
 
-  // ----- STRAIN DETAIL -----
   showStrainDetail(strainId) {
     const strain = STRAINS.find(s=>s.id===strainId);
     if (!strain) return;
     const container = this.el['strain-detail-content'];
-    container.innerHTML = `
-      <div class="strain-detail-header">
-        <div class="strain-detail-emoji">${strain.emoji}</div>
-        <div>
-          <div class="strain-detail-name">${strain.name}</div>
-          <span class="strain-detail-type ${strain.type}">${strain.type==='sativa'?'🌞 Sativa':strain.type==='indica'?'🌙 Indica':'⚡ Híbrido'}</span>
-        </div>
-      </div>
+    container.innerHTML = `<div class="strain-detail-header"><div class="strain-detail-emoji">${strain.emoji}</div><div><div class="strain-detail-name">${strain.name}</div><span class="strain-detail-type ${strain.type}">${strain.type==='sativa'?'🌞 Sativa':strain.type==='indica'?'🌙 Indica':'⚡ Híbrido'}</span></div></div>
       <div class="strain-detail-section"><p>${strain.desc}</p></div>
-      <div class="strain-detail-stats">
-        <div class="strain-stat"><div class="strain-stat-value">${strain.thc}</div><div class="strain-stat-label">THC</div></div>
-        <div class="strain-stat"><div class="strain-stat-value">${strain.cbd}</div><div class="strain-stat-label">CBD</div></div>
-      </div>
+      <div class="strain-detail-stats"><div class="strain-stat"><div class="strain-stat-value">${strain.thc}</div><div class="strain-stat-label">THC</div></div><div class="strain-stat"><div class="strain-stat-value">${strain.cbd}</div><div class="strain-stat-label">CBD</div></div></div>
       <div class="strain-detail-section"><label>Sabor</label><p>${strain.flavor}</p></div>
       <div class="strain-detail-section"><label>Efectos</label><p>${strain.effects}</p></div>
       <div class="strain-detail-section"><label>Publicaciones con esta cepa</label><div id="strain-posts"></div></div>`;
     this.showView('strain-detail');
     const related = this.state.posts.filter(p => p.strain && p.strain.id===strainId).slice(0,10);
     const sp = document.getElementById('strain-posts');
-    if (related.length===0) {
-      sp.innerHTML = '<div class="empty" style="padding:1rem 0">No hay publicaciones con esta cepa aún</div>';
-    } else {
-      sp.innerHTML = related.map(p => this.renderPostHTML(p)).join('');
-      this.bindPostEvents(sp);
-    }
+    if (related.length===0) { sp.innerHTML = '<div class="empty" style="padding:1rem 0">No hay publicaciones con esta cepa aún</div>'; }
+    else { sp.innerHTML = related.map(p => this.renderPostHTML(p)).join(''); this.bindPostEvents(sp); }
   },
 
   // ----- PROFILE -----
@@ -703,29 +729,21 @@ const App = {
     this.el['profile-bio'].textContent = u.bio || 'Sin biografía';
     this.el['profile-location'].textContent = u.location || 'Desconocido';
     this.el['profile-joined'].textContent = new Date(u.joinDate).toLocaleDateString('es-ES', { year:'numeric', month:'long' });
-
     const userPosts = this.state.posts.filter(p => p.userId===u.id);
     this.el['profile-posts-count'].textContent = userPosts.length;
     this.el['profile-followers-count'].textContent = u.followers.length;
     this.el['profile-following-count'].textContent = u.following.length;
-
     this._profileUserId = u.id;
     this.renderProfileTab('posts');
-
     const actions = this.el['profile-actions'];
     if (!isOwner) {
       const isFollowing = this.currentUser && this.currentUser.following.includes(u.id);
-      actions.innerHTML = `
-        <button class="auth-btn follow-btn ${isFollowing?'following':''}" data-follow-id="${u.id}" style="flex:1">${isFollowing?'✓ Siguiendo':'➕ Seguir'}</button>
-        <button class="auth-btn secondary" data-action="users">👥 Usuarios</button>`;
-      actions.querySelector('.follow-btn').addEventListener('click', e => {
-        this.toggleFollow(parseInt(e.target.dataset.followId));
-      });
-      actions.querySelector('[data-action="users"]').addEventListener('click', () => this.showView('users'));
+      actions.innerHTML = `<button class="auth-btn follow-btn ${isFollowing?'following':''}" data-follow-id="${u.id}" style="flex:1">${isFollowing?'✓ Siguiendo':'➕ Seguir'}</button><button class="auth-btn secondary" data-action="back">← Volver</button>`;
+      actions.querySelector('.follow-btn').addEventListener('click', e => { this.toggleFollow(parseInt(e.target.dataset.followId)); });
+      actions.querySelector('[data-action="back"]').addEventListener('click', () => this.showView('feed'));
       this.el['profile-dropdown-btn'].classList.remove('hidden');
     } else {
-      actions.innerHTML = `<button class="auth-btn" id="btn-edit-profile" style="flex:1">✏️ Editar Perfil</button>
-        <button class="auth-btn secondary" id="btn-logout">🚪 Salir</button>`;
+      actions.innerHTML = `<button class="auth-btn" id="btn-edit-profile" style="flex:1">✏️ Editar Perfil</button><button class="auth-btn secondary" id="btn-logout">🚪 Salir</button>`;
       document.getElementById('btn-edit-profile').addEventListener('click', () => this.showView('edit-profile'));
       document.getElementById('btn-logout').addEventListener('click', () => this.logout());
       this.el['profile-dropdown-btn'].classList.add('hidden');
@@ -739,72 +757,42 @@ const App = {
     const container = this.el['profile-posts'];
     const user = this.state.users.find(u=>u.id===uId);
     if (!user) return;
-
     if (tab==='posts') {
       const posts = this.state.posts.filter(p => p.userId===uId).sort((a,b)=>b.timestamp-a.timestamp);
-      if (posts.length===0) {
-        container.innerHTML = '<div class="empty"><div class="big">📝</div>No hay publicaciones</div>';
-      } else {
-        container.innerHTML = posts.map(p => this.renderPostHTML(p)).join('');
-        this.bindPostEvents(container);
-      }
+      if (posts.length===0) { container.innerHTML = '<div class="empty"><div class="big">📝</div>No hay publicaciones</div>'; }
+      else { container.innerHTML = posts.map(p => this.renderPostHTML(p)).join(''); this.bindPostEvents(container); }
     } else if (tab==='likes') {
-      const likedIds = user.following.length>0 ? this.state.posts.filter(p => p.likes.includes(uId)).sort((a,b)=>b.timestamp-a.timestamp) : [];
-      if (likedIds.length===0) {
-        container.innerHTML = '<div class="empty"><div class="big">❤️</div>Sin likes aún</div>';
-      } else {
-        container.innerHTML = likedIds.map(p => this.renderPostHTML(p)).join('');
-        this.bindPostEvents(container);
-      }
+      const liked = this.state.posts.filter(p => p.likes.includes(uId)).sort((a,b)=>b.timestamp-a.timestamp);
+      if (liked.length===0) { container.innerHTML = '<div class="empty"><div class="big">❤️</div>Sin likes aún</div>'; }
+      else { container.innerHTML = liked.map(p => this.renderPostHTML(p)).join(''); this.bindPostEvents(container); }
     } else if (tab==='strains') {
-      const usedStrainIds = [...new Set(this.state.posts.filter(p => p.userId===uId && p.strain).map(p => p.strain.id))];
-      const usedStrains = STRAINS.filter(s => usedStrainIds.includes(s.id));
-      if (usedStrains.length===0) {
-        container.innerHTML = '<div class="empty"><div class="big">🌿</div>No ha usado cepas aún</div>';
-      } else {
-        container.innerHTML = `<div class="strain-grid">${usedStrains.map(s => `
-          <div class="strain-card" data-strain-id="${s.id}">
-            <div class="strain-card-emoji">${s.emoji}</div>
-            <div class="strain-card-name">${s.name}</div>
-            <span class="strain-card-type ${s.type}">${s.type}</span>
-          </div>`).join('')}</div>`;
-        container.querySelectorAll('.strain-card').forEach(el => {
-          el.addEventListener('click', () => this.showStrainDetail(el.dataset.strainId));
-        });
-      }
+      const usedIds = [...new Set(this.state.posts.filter(p => p.userId===uId && p.strain).map(p => p.strain.id))];
+      const used = STRAINS.filter(s => usedIds.includes(s.id));
+      if (used.length===0) { container.innerHTML = '<div class="empty"><div class="big">🌿</div>No ha usado cepas aún</div>'; }
+      else { container.innerHTML = `<div class="strain-grid">${used.map(s => `<div class="strain-card" data-strain-id="${s.id}"><div class="strain-card-emoji">${s.emoji}</div><div class="strain-card-name">${s.name}</div><span class="strain-card-type ${s.type}">${s.type}</span></div>`).join('')}</div>`; container.querySelectorAll('.strain-card').forEach(el => { el.addEventListener('click', () => this.showStrainDetail(el.dataset.strainId)); }); }
     }
   },
 
   showUserProfile(userId) {
     const u = this.state.users.find(u=>u.id===userId);
     if (!u) return;
-    const isOwner = this.currentUser && this.currentUser.id===userId;
-    this.renderProfileUser(u, isOwner);
+    this.renderProfileUser(u, this.currentUser&&this.currentUser.id===userId);
   },
 
-  // ----- FOLLOW -----
   toggleFollow(targetUserId) {
     const user = this.currentUser;
-    if (!user) return this.toast('Debes iniciar sesión');
+    if (!user) return;
     const target = this.state.users.find(u=>u.id===targetUserId);
-    if (!target) return;
+    if (!target||target.id===user.id) return;
     const idx = user.following.indexOf(targetUserId);
-    if (idx>-1) {
-      user.following.splice(idx,1);
-      target.followers = target.followers.filter(id=>id!==user.id);
-    } else {
-      user.following.push(targetUserId);
-      target.followers.push(user.id);
-    }
+    if (idx>-1) { user.following.splice(idx,1); target.followers = target.followers.filter(id=>id!==user.id); }
+    else { user.following.push(targetUserId); target.followers.push(user.id); }
     this.saveData();
     const activeExplore = document.querySelector('.explore-tabs .tab.active');
     if (activeExplore) { this.renderExplore(activeExplore.dataset.explore); return; }
-    const activeView = document.querySelector('.view.active');
-    if (activeView && activeView.id==='view-users') { this.renderUsersDirectory(); return; }
     this.renderProfile();
   },
 
-  // ----- POST DETAIL -----
   showPostDetail(postId) {
     const post = this.state.posts.find(p=>p.id===postId);
     if (!post) return;
@@ -813,16 +801,7 @@ const App = {
     this.bindPostEvents(container);
     if (post.comments.length>0) {
       let html = '<div class="strain-detail-section"><label>Comentarios</label>';
-      post.comments.forEach(c => {
-        html += `<div class="comment">
-          <div class="avatar-sm">${this.getAvatarHTML(this.state.users.find(u=>u.id===c.userId)?.avatar)}</div>
-          <div class="comment-body">
-            <div class="comment-user">@${c.username}</div>
-            <div class="comment-text">${c.text}</div>
-            <div class="comment-time">${this.getTimeAgo(c.timestamp)}</div>
-          </div>
-        </div>`;
-      });
+      post.comments.forEach(c => { html += `<div class="comment"><div class="avatar-sm">${this.getAvatarHTML(this.state.users.find(u=>u.id===c.userId)?.avatar)}</div><div class="comment-body"><div class="comment-user">@${c.username}</div><div class="comment-text">${c.text}</div><div class="comment-time">${this.getTimeAgo(c.timestamp)}</div></div></div>`; });
       html += '</div>';
       container.innerHTML += html;
     }
@@ -831,54 +810,45 @@ const App = {
     this.showView('post-detail');
   },
 
-  // ----- NOTIFICATIONS -----
   renderNotifications() {
     const user = this.currentUser;
     if (!user) return;
     const notifs = this.state.notifications.filter(n => n.userId===user.id).sort((a,b)=>b.timestamp-a.timestamp);
     const container = this.el['notif-content'];
-    if (notifs.length===0) {
-      container.innerHTML = '<div class="empty"><div class="big">🔔</div>No hay notificaciones</div>';
-      return;
-    }
+    if (notifs.length===0) { container.innerHTML = '<div class="empty"><div class="big">🔔</div>No hay notificaciones</div>'; return; }
     container.innerHTML = notifs.map(n => {
       const icon = n.type==='like'?'❤️':'💬';
       const text = n.type==='like' ? `A <strong>@${n.fromUsername}</strong> le gustó tu publicación` : `<strong>@${n.fromUsername}</strong> comentó tu publicación`;
-      return `<div class="notif ${n.read?'':'unread'}" data-notif-id="${n.id}">
-        <div class="notif-icon">${icon}</div>
-        <div class="notif-body">${text}<div class="notif-time">${this.getTimeAgo(n.timestamp)}</div></div>
-        ${n.read?'':'<div class="notif-dot"></div>'}
-      </div>`;
+      return `<div class="notif ${n.read?'':'unread'}" data-notif-id="${n.id}"><div class="notif-icon">${icon}</div><div class="notif-body">${text}<div class="notif-time">${this.getTimeAgo(n.timestamp)}</div></div>${n.read?'':'<div class="notif-dot"></div>'}</div>`;
     }).join('');
     container.querySelectorAll('.notif').forEach(el => {
-      el.addEventListener('click', () => {
-        const id = parseInt(el.dataset.notifId);
-        const n = this.state.notifications.find(not=>not.id===id);
-        if (n) { n.read = true; this.saveData(); }
-        this.renderNotifications();
-      });
+      el.addEventListener('click', () => { const n = this.state.notifications.find(not=>not.id===parseInt(el.dataset.notifId)); if (n) { n.read = true; this.saveData(); } this.renderNotifications(); });
     });
   },
 
-  // ----- SETTINGS -----
   renderSettings() {
     const u = this.currentUser;
     if (!u) return;
-    this.el['settings-username'].textContent = '@' + u.username;
-    this.el['settings-email'].textContent = u.email;
-    this.el['settings-joindate'].textContent = new Date(u.joinDate).toLocaleDateString('es-ES', { year:'numeric', month:'long', day:'numeric' });
+    this.updateBadge();
+    if (this.el['settings-username']) this.el['settings-username'].textContent = '@'+u.username;
+    if (this.el['settings-email']) this.el['settings-email'].textContent = u.email||'No registrado';
+    if (this.el['settings-joindate']) this.el['settings-joindate'].textContent = new Date(u.joinDate).toLocaleDateString('es-ES', { year:'numeric', month:'long', day:'numeric' });
   },
 
-  // ----- EDIT PROFILE -----
   setupEditProfile() {
     const u = this.currentUser;
     if (!u) return;
     this.el['edit-current-avatar'].innerHTML = this.getAvatarHTML(u.avatar);
-    this.el['edit-bio'].value = u.bio || '';
+    this.el['edit-bio'].value = u.bio&&u.bio!=='Usuario anónimo 🌿' ? u.bio : '';
     this.el['edit-location'].value = u.location || '';
     this.el['edit-website'].value = u.website || '';
-    this.el['edit-cover-preview'].classList.add('hidden');
-    this.el['edit-cover-img'].src = '';
+    if (u.cover) {
+      this.el['edit-cover-img'].src = u.cover;
+      this.el['edit-cover-preview'].classList.remove('hidden');
+    } else {
+      this.el['edit-cover-preview'].classList.add('hidden');
+      this.el['edit-cover-img'].src = '';
+    }
     this.el['edit-avatar-input'].value = '';
     this.el['edit-cover-input'].value = '';
   },
@@ -889,78 +859,26 @@ const App = {
     const bio = this.el['edit-bio'].value.trim();
     const location = this.el['edit-location'].value.trim();
     const website = this.el['edit-website'].value.trim();
-
     const avatarImg = this.el['edit-current-avatar'].querySelector('img');
     if (avatarImg) user.avatar = avatarImg.src;
-
+    const coverPreview = this.el['edit-cover-preview'];
     const coverImg = this.el['edit-cover-img'];
-    if (coverImg.src) user.cover = coverImg.src;
-
+    if (coverPreview.classList.contains('hidden') && !coverImg.src && user.cover) {
+      user.cover = '';
+    } else if (coverImg.src) {
+      user.cover = coverImg.src;
+    }
     if (bio) user.bio = bio;
     if (location) user.location = location;
     if (website) user.website = website;
-
-    // Update avatar in all posts
-    this.state.posts.forEach(p => {
-      if (p.userId===user.id) p.userAvatar = user.avatar;
-    });
-
+    if (user.isAnonymous) user.bio = bio || 'Usuario anónimo 🌿';
+    this.state.posts.forEach(p => { if (p.userId===user.id) p.userAvatar = user.avatar; });
     this.saveData();
+    this.updateBadge();
     this.toast('Perfil actualizado ✓');
     this.showView('profile');
   },
 
-  // ----- USERS DIRECTORY -----
-  renderUsersDirectory() {
-    const query = this.el['users-search'].value.trim().toLowerCase();
-    const container = this.el['users-directory'];
-    let users = this.state.users.filter(u => u.id!==(this.currentUser?this.currentUser.id:-1));
-    if (query) users = users.filter(u => u.username.toLowerCase().includes(query));
-    if (users.length===0) {
-      container.innerHTML = '<div class="empty"><div class="big">👤</div>No se encontraron usuarios</div>';
-      return;
-    }
-    container.innerHTML = users.map(u => {
-      const isFollowing = this.currentUser && this.currentUser.following.includes(u.id);
-      return `<div class="user-card-mini" data-user-id="${u.id}">
-        <div class="avatar-sm">${this.getAvatarHTML(u.avatar)}</div>
-        <div class="user-card-mini-info">
-          <div class="user-card-mini-name">@${u.username}</div>
-          <div class="user-card-mini-bio">${u.bio||'Sin biografía'} · ${u.followers.length} seguidores</div>
-        </div>
-        <button class="follow-btn-sm ${isFollowing?'following':''}">${isFollowing?'Siguiendo':'Seguir'}</button>
-      </div>`;
-    }).join('');
-    container.querySelectorAll('.user-card-mini').forEach(el => {
-      el.addEventListener('click', e => {
-        if (e.target.closest('.follow-btn-sm')) return;
-        this.showUserProfile(parseInt(el.dataset.userId));
-      });
-    });
-    container.querySelectorAll('.follow-btn-sm').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        const card = btn.closest('.user-card-mini');
-        this.toggleFollow(parseInt(card.dataset.userId));
-      });
-    });
-  },
-
-  // ----- CLEAR DATA -----
-  clearAllData() {
-    if (!confirm('¿Resetear todos los datos? Se perderán usuarios, publicaciones y configuración.')) return;
-    localStorage.removeItem('weedforum_data');
-    this.state = { currentUser:null, users:[], posts:[], notifications:[], nextId:1, theme:'dark', accent:'default' };
-    this.seedData();
-    this.state.currentUser = null;
-    this.applyTheme();
-    this.applyAccent();
-    this.el.app.classList.add('hidden');
-    document.getElementById('auth-screen').classList.remove('hidden');
-    this.toast('Datos reseteados');
-  },
-
-  // ----- TOAST -----
   toast(msg) {
     const el = this.el.toast;
     el.textContent = msg;
@@ -969,25 +887,20 @@ const App = {
     this._toastTimer = setTimeout(() => el.classList.add('hidden'), 2500);
   },
 
-  // ----- PERSISTENCE -----
   saveData() {
     try { localStorage.setItem('weedforum_data', JSON.stringify(this.state)); } catch(e) {}
   },
 
   loadData() {
-    try {
-      const raw = localStorage.getItem('weedforum_data');
-      if (raw) Object.assign(this.state, JSON.parse(raw));
-    } catch(e) {}
+    try { const raw = localStorage.getItem('weedforum_data'); if (raw) Object.assign(this.state, JSON.parse(raw)); } catch(e) {}
   },
 
-  // ----- SEED -----
   seedData() {
     this.state.users = [
-      { id:1, username:'cannabis_expert', email:'expert@weed.com', password:'1234', avatar:'🌿', cover:'', bio:'Experto en cepas cannábicas 🧬 | Catador profesional', location:'Barcelona', website:'', followers:[2,4], following:[2,3], joinDate:'2024-01-15T10:00:00Z' },
-      { id:2, username:'green_thumbs', email:'green@weed.com', password:'1234', avatar:'🍃', cover:'', bio:'Cultivador orgánico 🌱 | 10 años de experiencia', location:'Madrid', website:'', followers:[1,3], following:[1,4], joinDate:'2024-03-20T10:00:00Z' },
-      { id:3, username:'stoner_life', email:'stoner@weed.com', password:'1234', avatar:'🔥', cover:'', bio:'Vida cannábica 24/7 🌿 | Reseñas y más', location:'Valencia', website:'', followers:[1,4], following:[1,2], joinDate:'2024-06-10T10:00:00Z' },
-      { id:4, username:'weed_artist', email:'artist@weed.com', password:'1234', avatar:'🎨', cover:'', bio:'Arte y cannabis 🎨 | Dibujos y pinturas', location:'Bilbao', website:'', followers:[2,3], following:[1,3], joinDate:'2024-09-05T10:00:00Z' }
+      { id:1, username:'cannabis_expert', email:'expert@weed.com', password:'1234', avatar:'🌿', cover:'', bio:'Experto en cepas cannábicas 🧬', location:'Barcelona', website:'', followers:[2,4], following:[2,3], joinDate:'2024-01-15T10:00:00Z', isAnonymous:false },
+      { id:2, username:'green_thumbs', email:'green@weed.com', password:'1234', avatar:'🍃', cover:'', bio:'Cultivador orgánico 🌱', location:'Madrid', website:'', followers:[1,3], following:[1,4], joinDate:'2024-03-20T10:00:00Z', isAnonymous:false },
+      { id:3, username:'stoner_life', email:'stoner@weed.com', password:'1234', avatar:'🔥', cover:'', bio:'Vida cannábica 24/7 🌿', location:'Valencia', website:'', followers:[1,4], following:[1,2], joinDate:'2024-06-10T10:00:00Z', isAnonymous:false },
+      { id:4, username:'weed_artist', email:'artist@weed.com', password:'1234', avatar:'🎨', cover:'', bio:'Arte y cannabis 🎨', location:'Bilbao', website:'', followers:[2,3], following:[1,3], joinDate:'2024-09-05T10:00:00Z', isAnonymous:false }
     ];
     this.state.nextId = 5;
     this.state.posts = [
@@ -1005,5 +918,6 @@ const App = {
   }
 };
 
-// ===== START =====
+const DEFAULT_AVATARS = ['🌿','🍃','🔥','💚','🌲','🍀','☘️','🌱','🌸','🌈','⭐','💫','🍄','🌻','🍂'];
+
 document.addEventListener('DOMContentLoaded', () => App.init());

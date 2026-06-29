@@ -9,10 +9,12 @@
 <body>
 
 <div id="toast" class="hidden"></div>
+<div id="overlay" class="hidden"></div>
 
-<!-- ===== AUTH SCREEN ===== -->
-<div id="auth-screen">
-  <div class="auth-container">
+<!-- ===== AUTH MODAL ===== -->
+<div id="auth-modal" class="modal hidden">
+  <div class="modal-content glass">
+    <button class="modal-close glass-btn">✕</button>
     <div class="auth-logo">🌿</div>
     <h2 class="auth-title">WeedForum</h2>
     <p class="auth-sub">Comunidad Cannábica</p>
@@ -27,7 +29,7 @@
     <form id="register-form" class="auth-form hidden" novalidate>
       <div class="input-icon">👤 <input type="text" id="reg-username" placeholder="Nombre de usuario" autocomplete="off"></div>
       <div class="input-icon">📧 <input type="email" id="reg-email" placeholder="Correo electrónico" autocomplete="email"></div>
-      <div class="input-icon">🔒 <input type="password" id="reg-password" placeholder="Contraseña (mín. 4 caracteres)" autocomplete="new-password"></div>
+      <div class="input-icon">🔒 <input type="password" id="reg-password" placeholder="Contraseña (mín. 4)" autocomplete="new-password"></div>
       <div class="input-icon">🔒 <input type="password" id="reg-confirm" placeholder="Confirmar contraseña" autocomplete="new-password"></div>
       <button type="submit" class="auth-btn">Crear Cuenta</button>
       <p class="auth-switch">¿Ya tienes cuenta? <a href="#" id="show-login">Inicia Sesión</a></p>
@@ -36,7 +38,7 @@
 </div>
 
 <!-- ===== MAIN APP ===== -->
-<div id="app" class="hidden">
+<div id="app">
 
   <!-- Header -->
   <header id="main-header">
@@ -45,6 +47,10 @@
       <div class="subtitle">Comunidad Cannábica</div>
     </div>
     <div class="header-right">
+      <div class="user-badge" id="user-badge">
+        <span class="user-badge-avatar" id="badge-avatar">🌿</span>
+        <span class="user-badge-name" id="badge-name">@usuario</span>
+      </div>
       <button class="glass-btn" id="btn-search-toggle">🔍</button>
       <button class="glass-btn" id="btn-theme-toggle">🌙</button>
     </div>
@@ -61,7 +67,7 @@
   </main>
 
   <!-- ===== VIEW: EXPLORE ===== -->
-  <main id="view-explore" class="view hidden">
+  <main id="view-explore" class="view">
     <div class="explore-search">
       <div class="input-icon" style="flex:1">🔍 <input type="text" id="explore-search" placeholder="Buscar cepas, usuarios..."></div>
     </div>
@@ -74,7 +80,7 @@
   </main>
 
   <!-- ===== VIEW: CREATE POST ===== -->
-  <main id="view-create" class="view hidden">
+  <main id="view-create" class="view">
     <div class="create-card glass">
       <h3>Nueva Publicación</h3>
       <div class="create-user-row">
@@ -97,12 +103,12 @@
   </main>
 
   <!-- ===== VIEW: NOTIFICATIONS ===== -->
-  <main id="view-notifications" class="view hidden">
+  <main id="view-notifications" class="view">
     <div id="notif-content"></div>
   </main>
 
   <!-- ===== VIEW: PROFILE ===== -->
-  <main id="view-profile" class="view hidden">
+  <main id="view-profile" class="view">
     <div class="profile-wrapper">
       <div class="profile-cover" id="profile-cover"></div>
       <div class="profile-info glass">
@@ -138,7 +144,7 @@
   </main>
 
   <!-- ===== VIEW: STRAINS CATALOG ===== -->
-  <main id="view-strains" class="view hidden">
+  <main id="view-strains" class="view">
     <div class="explore-search">
       <div class="input-icon" style="flex:1">🔍 <input type="text" id="strains-search" placeholder="Buscar cepa..."></div>
     </div>
@@ -152,13 +158,13 @@
   </main>
 
   <!-- ===== VIEW: STRAIN DETAIL ===== -->
-  <main id="view-strain-detail" class="view hidden">
+  <main id="view-strain-detail" class="view">
     <button class="glass-btn back-btn">← Volver</button>
     <div id="strain-detail-content"></div>
   </main>
 
   <!-- ===== VIEW: POST DETAIL ===== -->
-  <main id="view-post-detail" class="view hidden">
+  <main id="view-post-detail" class="view">
     <button class="glass-btn back-btn">← Volver</button>
     <div id="post-detail-content"></div>
     <div class="comment-form glass">
@@ -168,7 +174,7 @@
   </main>
 
   <!-- ===== VIEW: EDIT PROFILE ===== -->
-  <main id="view-edit-profile" class="view hidden">
+  <main id="view-edit-profile" class="view">
     <div class="edit-header">
       <button class="glass-btn back-btn">←</button>
       <h3>Editar Perfil</h3>
@@ -177,11 +183,11 @@
     <div class="create-card glass">
       <div class="edit-avatar-section">
         <div class="edit-current-avatar" id="edit-current-avatar">👤</div>
-        <label class="auth-btn" style="text-align:center;cursor:pointer;font-size:0.85rem">📷 Cambiar foto<Input type="file" id="edit-avatar-input" accept="image/*" hidden></label>
+        <label class="auth-btn" style="text-align:center;cursor:pointer;font-size:0.85rem">📷 Cambiar foto<input type="file" id="edit-avatar-input" accept="image/*" hidden></label>
       </div>
       <div class="edit-cover-section">
         <label style="font-size:0.8rem;color:var(--muted);display:block;margin-bottom:0.3rem">Imagen de portada (banner)</label>
-        <div class="input-icon">🖼️ <Input type="file" id="edit-cover-input" accept="image/*"></div>
+        <div class="input-icon">🖼️ <input type="file" id="edit-cover-input" accept="image/*"></div>
         <div id="edit-cover-preview" class="hidden"><img id="edit-cover-img"><button id="edit-cover-remove" class="glass-btn" style="position:absolute;top:0.3rem;right:0.3rem;width:1.8rem;height:1.8rem;font-size:0.8rem">✕</button></div>
       </div>
       <div class="input-icon">📝 <input type="text" id="edit-bio" placeholder="Biografía"></div>
@@ -192,11 +198,39 @@
   </main>
 
   <!-- ===== VIEW: SETTINGS ===== -->
-  <main id="view-settings" class="view hidden">
+  <main id="view-settings" class="view">
     <div class="edit-header">
       <button class="glass-btn back-btn">←</button>
       <h3>Configuración</h3>
       <span></span>
+    </div>
+
+    <div class="settings-section glass">
+      <label class="settings-label">Cuenta</label>
+      <div class="settings-row" id="settings-account-status">
+        <span id="settings-status-text">👤 Modo anónimo</span>
+        <button class="auth-btn" id="btn-auth-modal" style="padding:0.4rem 0.8rem;font-size:0.75rem;width:auto">🔐 Registrar / Iniciar</button>
+      </div>
+      <div class="settings-row" id="settings-info-username">
+        <span>👤 Usuario</span>
+        <span class="settings-value" id="settings-username">—</span>
+      </div>
+      <div class="settings-row" id="settings-info-email">
+        <span>📧 Email</span>
+        <span class="settings-value" id="settings-email">—</span>
+      </div>
+      <div class="settings-row" id="settings-info-joindate" style="border:none">
+        <span>🗓️ Miembro desde</span>
+        <span class="settings-value" id="settings-joindate">—</span>
+      </div>
+      <div class="settings-row hidden" id="settings-secure-row">
+        <span>🔒 Cuenta segura</span>
+        <span class="settings-value" id="settings-secure-badge">✓</span>
+      </div>
+      <div class="settings-row" id="settings-reroll-row">
+        <span>🎲 Cambiar nombre anónimo</span>
+        <button class="auth-btn secondary" id="btn-reroll" style="padding:0.4rem 0.8rem;font-size:0.75rem;width:auto">🎲 Nuevo nombre</button>
+      </div>
     </div>
 
     <div class="settings-section glass">
@@ -209,7 +243,7 @@
         </label>
       </div>
       <div class="settings-row">
-        <span>🔵 Modo acento</span>
+        <span>🔵 Color de acento</span>
         <div class="color-options">
           <span class="color-dot active" data-color="default" style="background:linear-gradient(135deg,#2ecc71,#27ae60)"></span>
           <span class="color-dot" data-color="blue" style="background:linear-gradient(135deg,#3498db,#2980b9)"></span>
@@ -217,26 +251,6 @@
           <span class="color-dot" data-color="orange" style="background:linear-gradient(135deg,#e67e22,#d35400)"></span>
           <span class="color-dot" data-color="pink" style="background:linear-gradient(135deg,#e91e63,#c2185b)"></span>
         </div>
-      </div>
-    </div>
-
-    <div class="settings-section glass">
-      <label class="settings-label">Cuenta</label>
-      <div class="settings-row">
-        <span>👤 Nombre de usuario</span>
-        <span class="settings-value" id="settings-username">-</span>
-      </div>
-      <div class="settings-row">
-        <span>📧 Email</span>
-        <span class="settings-value" id="settings-email">-</span>
-      </div>
-      <div class="settings-row">
-        <span>📅 Miembro desde</span>
-        <span class="settings-value" id="settings-joindate">-</span>
-      </div>
-      <div class="settings-row" style="border:none;padding-bottom:0">
-        <span>🗑️ Datos</span>
-        <button id="btn-clear-data" class="auth-btn secondary" style="padding:0.4rem 0.8rem;font-size:0.75rem;width:auto">Resetear datos</button>
       </div>
     </div>
 
@@ -252,19 +266,6 @@
     </div>
   </main>
 
-  <!-- ===== VIEW: ALL USERS DIRECTORY ===== -->
-  <main id="view-users" class="view hidden">
-    <div class="edit-header">
-      <button class="glass-btn back-btn">←</button>
-      <h3>Usuarios</h3>
-      <span></span>
-    </div>
-    <div class="explore-search">
-      <div class="input-icon" style="flex:1">🔍 <input type="text" id="users-search" placeholder="Buscar usuarios..."></div>
-    </div>
-    <div id="users-directory"></div>
-  </main>
-
   <!-- Bottom Navigation -->
   <nav id="bottom-nav">
     <button class="active" data-view="feed">🏠<span>Inicio</span></button>
@@ -275,9 +276,6 @@
   </nav>
 
 </div>
-
-<!-- ===== OVERLAY ===== -->
-<div id="overlay" class="hidden"></div>
 
 <script src="app.js"></script>
 </body>
